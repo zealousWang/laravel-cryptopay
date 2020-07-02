@@ -1,21 +1,9 @@
 # CoinPayments v2
 
-[![Latest Stable Version](https://poser.pugx.org/hexters/coinpayment/v/stable)](https://packagist.org/packages/hexters/coinpayment)
-[![Total Downloads](https://poser.pugx.org/hexters/coinpayment/downloads)](https://packagist.org/packages/hexters/coinpayment)
-[![License](https://poser.pugx.org/hexters/coinpayment/license)](https://packagist.org/packages/hexters/coinpayment)
-
 ## New transform coinpayment package
 
-CoinPayment is a Laravel module for handling transactions from [**CoinPayment**](https://www.coinpayments.net/index.php?ref=3dc0c5875304cc5cc1d98782c2741cb5) like a create transaction, history transaction, etc.
+WincashPayment is a Laravel module for handling transactions from [**Wincashpay**](https://wincashpay.com) like a create transaction, history transaction, etc.
 
-![Example Image](https://github.com/hexters/CoinPayment/blob/master/examplev2.png?raw=true)
-
-### Version support
-| version | laravel |
-|-|-|
-|[v1.1.3](https://github.com/hexters/CoinPayment/releases/tag/v1.1.3)|5.6|
-|[v2.0.0](https://github.com/hexters/CoinPayment)|5.8|
-|[v2.0.3](https://github.com/hexters/CoinPayment)|^6.x|
 
 ## Requirement
 * Laravel ^5.8
@@ -24,17 +12,17 @@ CoinPayment is a Laravel module for handling transactions from [**CoinPayment**]
 ## Installation
 You can install this package via composer:
 ```
-$ composer require hexters/coinpayment
+$ composer require wincash/payment
 ```
 
 Publishing vendor
 ```
-$ php artisan vendor:publish --tag=coinpayment
+$ php artisan vendor:publish --tag=wincash
 ```
 
 Install CoinPayment configuration
 ```
-$ php artisan coinpayment:install
+$ php artisan wincashpay:install
 ```
 
 Installation finish.
@@ -132,11 +120,6 @@ protected $except = [
 ]; 
 . . .
 ```
-# Troubleshooting
-## Cannot use object of type Illuminate\Http\JsonResponse as array
-Visit the [**CoinPayment API Keys**](https://www.coinpayments.net/index.php?cmd=acct_api_keys) page, under *Actions*, click on the *Edit Permissions* button. Enter the IP address of your API endpoint (e.g. your website server) in the *Restrict to IP/IP Range* input. Leaving it empty, may cause this error to occur.
 
 # Donate
 If this Laravel package was useful to you, please consider donating some coffee ☕☕☕☕
-
-Bitcoin (BTC): ```1388MHjeHmq6kUC7WpSS6pPtgG7hm7fCau```
