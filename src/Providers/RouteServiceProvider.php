@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Providers;
+namespace Wincash\Payment\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @var string
      */
-    protected $namespace = 'Wincash\CoinPayment\Http\Controllers';
+    protected $namespace = 'Wincash\Payment\Http\Controllers';
 
     /**
      * Called before routes are registered.

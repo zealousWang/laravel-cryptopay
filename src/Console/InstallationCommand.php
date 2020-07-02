@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Console;
+namespace Wincash\Payment\Console;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
@@ -79,7 +79,7 @@ class InstallationCommand extends Command
             }
             $this->line(PHP_EOL);
             $this->line('---------------------------------------------------------');
-            $this->info('Visit this link https://www.wincashpay.com/acct-settings and got to the Merchant Settings tab And insert data below !');
+            $this->info('Visit this link https://wincashpay.com/acct-settings and got to the Merchant Settings tab And insert data below !');
             $this->line(PHP_EOL);
             $this->line('IPN Secret         : ' . $ipn_secret);
             $this->line('IPN URL            : ' . url('/wincashpay/ipn'));

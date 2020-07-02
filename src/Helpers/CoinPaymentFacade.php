@@ -1,5 +1,5 @@
 <?php
-namespace Wincash\CoinPayment\Helpers;
+namespace Wincash\Payment\Helpers;
 
 use Illuminate\Support\Facades\Facade;
 

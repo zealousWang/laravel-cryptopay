@@ -1,11 +1,11 @@
 <?php 
 
-namespace Wincash\CoinPayment\Helpers;
+namespace Wincash\Payment\Helpers;
 
 use App\Jobs\CoinpaymentListener;
-use Wincash\CoinPayment\Traits\ApiCallTrait;
+use Wincash\Payment\Traits\ApiCallTrait;
 use Illuminate\Support\Facades\Crypt;
-use Wincash\CoinPayment\Entities\CoinpaymentTransaction;
+use Wincash\Payment\Entities\CoinpaymentTransaction;
 
 class CoinPaymentHelper {
 

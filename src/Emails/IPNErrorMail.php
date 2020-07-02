@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Emails;
+namespace Wincash\Payment\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

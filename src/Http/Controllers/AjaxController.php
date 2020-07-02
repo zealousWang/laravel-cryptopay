@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Http\Controllers;
+namespace Wincash\Payment\Http\Controllers;
 
 use App\Jobs\CoinpaymentListener;
 
@@ -8,9 +8,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Wincash\CoinPayment\Traits\ApiCallTrait;
-use Wincash\CoinPayment\Helpers\CoinPaymentHelper;
-use Wincash\CoinPayment\Entities\CoinpaymentTransaction;
+use Wincash\Payment\Traits\ApiCallTrait;
+use Wincash\Payment\Helpers\CoinPaymentHelper;
+use Wincash\Payment\Entities\CoinpaymentTransaction;
 
 class AjaxController extends CoinPaymentController {
 

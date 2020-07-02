@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Http\Middleware;
+namespace Wincash\Payment\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

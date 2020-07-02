@@ -1,5 +1,5 @@
 <?php
-  namespace Wincash\CoinPayment\Traits;
+  namespace Wincash\Payment\Traits;
 
   trait ApiCallTrait {
 

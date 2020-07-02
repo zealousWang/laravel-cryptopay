@@ -1,15 +1,15 @@
 <?php
 
-namespace Wincash\CoinPayment\Http\Controllers;
+namespace Wincash\Payment\Http\Controllers;
 
 use App\Jobs\CoinpaymentListener;
-use Wincash\CoinPayment\Emails\IPNErrorMail as SendEmail;
+use Wincash\Payment\Emails\IPNErrorMail as SendEmail;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Wincash\CoinPayment\Entities\CoinpaymentTransaction;
-use Wincash\CoinPayment\Traits\ApiCallTrait;
+use Wincash\Payment\Entities\CoinpaymentTransaction;
+use Wincash\Payment\Traits\ApiCallTrait;
 
 class IPNController extends Controller {
     

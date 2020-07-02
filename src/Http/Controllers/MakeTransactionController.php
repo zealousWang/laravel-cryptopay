@@ -1,12 +1,12 @@
 <?php
 
-namespace Wincash\CoinPayment\Http\Controllers;
+namespace Wincash\Payment\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Wincash\CoinPayment\Helpers\CoinPaymentHelper;
+use Wincash\Payment\Helpers\CoinPaymentHelper;
 
 class MakeTransactionController extends CoinPaymentController {
 

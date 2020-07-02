@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Entities;
+namespace Wincash\Payment\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;

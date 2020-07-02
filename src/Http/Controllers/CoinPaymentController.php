@@ -1,6 +1,6 @@
 <?php
 
-namespace Wincash\CoinPayment\Http\Controllers;
+namespace Wincash\Payment\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Wincash\CoinPayment\Providers;
+namespace Wincash\Payment\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Wincash\CoinPayment\Console\InstallationCommand;
-use Wincash\CoinPayment\Helpers\CoinPaymentHelper;
+use Wincash\Payment\Console\InstallationCommand;
+use Wincash\Payment\Helpers\CoinPaymentHelper;
 
 class CoinPaymentServiceProvider extends ServiceProvider
 {
