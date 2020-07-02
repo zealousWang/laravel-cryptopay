@@ -1,0 +1,16 @@
+{
+    "name": "CoinPayment",
+    "alias": "coinpayment",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Wincash\\CoinPayment\\Providers\\CoinPaymentServiceProvider"
+    ],
+    "aliases": {
+        "CoinPayment": "Wincash\\CoinPayment\\Helpers\\CoinPaymentFacade"
+    },
+    "files": [],
+    "requires": []
+}
