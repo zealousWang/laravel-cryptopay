@@ -1,4 +1,4 @@
-# CoinPayments v2
+# WIncashpay v1
 
 ## New transform coinpayment package
 
@@ -120,6 +120,3 @@ protected $except = [
 ]; 
 . . .
 ```
-
-# Donate
-If this Laravel package was useful to you, please consider donating some coffee ☕☕☕☕
