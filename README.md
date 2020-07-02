@@ -17,7 +17,7 @@ $ composer require wincash/payment
 
 Publishing vendor
 ```
-$ php artisan vendor:publish --tag=wincash
+$ php artisan vendor:publish --tag=wincashpay
 ```
 
 Install CoinPayment configuration
