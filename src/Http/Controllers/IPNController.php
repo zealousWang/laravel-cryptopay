@@ -2,13 +2,13 @@
 
 namespace Wincash\Payment\Http\Controllers;
 
-use App\Jobs\CoinpaymentListener;
+use App\Jobs\WincashpayIPNListener;
 use Wincash\Payment\Emails\IPNErrorMail as SendEmail;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Wincash\Payment\Entities\CoinpaymentTransaction;
+use Wincash\Payment\Entities\WincashpayTransaction;
 use Wincash\Payment\Traits\ApiCallTrait;
 
 class IPNController extends Controller {
@@ -61,7 +61,7 @@ class IPNController extends Controller {
         return response('HMAC signature does not match', 401);
     }
 
-    $transactions = CoinpaymentTransaction::where('txn_id', $req->txn_id)->first();
+    $transactions = WincashpayTransaction::where('txn_id', $req->txn_id)->first();
 
         if($transactions){
 
@@ -81,7 +81,7 @@ class IPNController extends Controller {
                 ]));
             }
             
-            dispatch(new CoinpaymentListener(array_merge($transactions->toArray(), [
+            dispatch(new WincashpayIPNListener(array_merge($transactions->toArray(), [
                 'transaction_type' => 'old'
             ])));
 

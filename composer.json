@@ -1,7 +1,7 @@
 {
     "name": "wincash/payment",
-    "description": "WincashPayment is a Laravel module for handling transactions from WincashPayment like a create transaction, history transaction, etc.",
-    "keywords": ["Coinpayment", "Payment Gateway", "Laravel", "Cryptocurrency", "Bitcoin", "Wincash"],
+    "description": "WincashPayment is a Laravel module for handling transactions from WincashPayment like deposit, withdraw, create transaction, history transaction, etc.",
+    "keywords": ["Coinpayment", "Payment Gateway", "Laravel", "Cryptocurrency", "Bitcoin", "ETH", "USDT","Wincash", "Wincash-Gold"],
     "license" : "MIT",
     "authors": [
         {
@@ -12,10 +12,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Wincash\\Payment\\Providers\\CoinPaymentServiceProvider"
+                "Wincash\\Payment\\Providers\\WincashpayServiceProvider"
             ],
             "aliases": {
-                "Wincash": "Wincash\\Payment\\Helpers\\CoinPaymentFacade"
+                "Wincash": "Wincash\\Payment\\Helpers\\WincashpayFacade"
             }
         }
     },

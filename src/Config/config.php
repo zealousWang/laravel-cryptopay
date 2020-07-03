@@ -41,7 +41,7 @@ return [
     'ipn' => [
         'activate' => env('WINCASHPAY_IPN_ACTIVATE', false),
         'config' => [
-            'wincashpay_merchant_id'       => env('WINCASHPAY_MARCHANT_ID', ''),
+            'wincashpay_merchant_id'       => env('WINCASHPAY_MERCHANT_ID', ''),
             'wincashpay_ipn_secret'        => env('WINCASHPAY_IPN_SECRET', ''),
             'wincashpay_ipn_debug_email'   => env('WINCASHPAY_IPN_DEBUG_EMAIL', ''),
         ]

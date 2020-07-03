@@ -2,24 +2,23 @@
 
 namespace Wincash\Payment\Http\Controllers;
 
-use App\Jobs\CoinpaymentListener;
+use App\Jobs\WincashpayIPNListener;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Wincash\Payment\Enums\WincashpayCommand;
 use Wincash\Payment\Traits\ApiCallTrait;
-use Wincash\Payment\Helpers\CoinPaymentHelper;
-use Wincash\Payment\Entities\CoinpaymentTransaction;
+use Wincash\Payment\Helpers\WincashpayHelper;
+use Wincash\Payment\Entities\WincashpayTransaction;
 
 class AjaxController extends CoinPaymentController {
-
-    use ApiCallTrait;
 
     protected $helper;
     protected $model;
 
-    public function __construct(CoinPaymentHelper $helper, CoinpaymentTransaction $model) {
+    public function __construct(WincashpayHelper $helper, WincashpayTransaction $model) {
         parent::__construct();
         $this->helper = $helper;
         $this->model = $model;
@@ -42,7 +41,7 @@ class AjaxController extends CoinPaymentController {
         return [
             'result' => false,
             'status' => $rates['error'],
-            'error' => 'Fata error, cannot getting support coin from CoinPayments.'
+            'error' => 'Fatal error, cannot getting support coin from Wincashpay.'
         ];
 
     }
@@ -65,7 +64,7 @@ class AjaxController extends CoinPaymentController {
             }
 
             if(empty($rates[config('wincashpay.default_currency')])){
-                throw new Exception('Is fiat ' . config('wincashpay.default_currency') . ' not supported. please contact CoinPayments support.');
+                throw new Exception('Is fiat ' . config('wincashpay.default_currency') . ' not supported. please contact Wincashpay support.');
             }
 
             /**
@@ -241,12 +240,12 @@ class AjaxController extends CoinPaymentController {
                 'buyer_email' => $request->buyer_email
             ];
             
-            $create = $this->api_call('create_transaction', $data);
+            $create = $this->api_call(WincashpayCommand::CREATE_TRANSACTION, $data);
             if($create['error'] != 'ok'){
                 throw new Exception($create['error']);
             }
 
-            $info = $this->api_call('get_tx_info', ['txid' => $create['result']['txn_id']]);
+            $info = $this->api_call(WincashpayCommand::GET_TX_INFO, ['txid' => $create['result']['txn_id']]);
             if($info['error'] != 'ok'){
                 throw new Exception($info['error']);
             }
@@ -264,7 +263,7 @@ class AjaxController extends CoinPaymentController {
              * Dispatching job
              */
 
-            dispatch(new CoinpaymentListener(array_merge($result, [
+            dispatch(new WincashpayIPNListener(array_merge($result, [
                 'transaction_type' => 'new'
             ])));
 
@@ -286,5 +285,7 @@ class AjaxController extends CoinPaymentController {
             }
         }
     }
+
+
 
 }

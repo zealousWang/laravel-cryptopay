@@ -5,20 +5,18 @@ namespace Wincash\Payment\Entities;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class CoinpaymentTransaction extends Model {
+class WincashpayTransaction extends Model {
 
     use SoftDeletes;
 
     protected $fillable = [
         'address',
         'amount',
-        'amountf',
-        'coin',
+        'currency',
         'confirms_needed',
         'payment_address',
         'qrcode_url',
         'received',
-        'receivedf',
         'recv_confirms',
         'status',
         'status_text',
@@ -43,9 +41,7 @@ class CoinpaymentTransaction extends Model {
      */
     protected $casts = [
         'amount' => 'double',
-        'amountf' => 'double',
         'received' => 'double',
-        'receivedf' => 'double',
         'payload' => 'array'
     ];
 

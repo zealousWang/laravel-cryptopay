@@ -82,7 +82,7 @@ Create Button transaction. Example placed on your controller
 
 ## Listening status transaction
 
-Open the Job file `App\Jobs\CoinpaymentListener` for the listen the our transaction and proccess
+Open the Job file `App\Jobs\WincashpayIPNListener` for the listen the our transaction and proccess
 
 ## Manual check without IPN
 

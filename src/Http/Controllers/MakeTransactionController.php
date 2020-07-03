@@ -6,13 +6,13 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Wincash\Payment\Helpers\CoinPaymentHelper;
+use Wincash\Payment\Helpers\WincashpayHelper;
 
 class MakeTransactionController extends CoinPaymentController {
 
     protected $helper;
 
-    public function __construct(CoinPaymentHelper $helper) {
+    public function __construct(WincashpayHelper $helper) {
         parent::__construct();
         $this->helper = $helper;
     }

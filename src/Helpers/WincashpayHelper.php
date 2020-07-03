@@ -2,12 +2,12 @@
 
 namespace Wincash\Payment\Helpers;
 
-use App\Jobs\CoinpaymentListener;
+use App\Jobs\WincashpayIPNListener;
 use Wincash\Payment\Traits\ApiCallTrait;
 use Illuminate\Support\Facades\Crypt;
-use Wincash\Payment\Entities\CoinpaymentTransaction;
+use Wincash\Payment\Entities\WincashpayTransaction;
 
-class CoinPaymentHelper {
+class WincashpayHelper {
 
 	use ApiCallTrait;
 
@@ -37,14 +37,14 @@ class CoinPaymentHelper {
 				throw new \Exception($status['error']);
 			}
 
-			$transactions = CoinpaymentTransaction::where('txn_id', $txn_id)->first();
+			$transactions = WincashpayTransaction::where('txn_id', $txn_id)->first();
 			if(is_null($transactions)) {
 				throw new \Exception('Ilegal! Transaction not found from database');
 			}
 
 			$transactions->update($status['result']);
 				
-			dispatch(new CoinpaymentListener(array_merge($transactions->toArray(), [
+			dispatch(new WincashpayIPNListener(array_merge($transactions->toArray(), [
 				'transaction_type' => 'old'
 			])));
 
@@ -59,7 +59,7 @@ class CoinPaymentHelper {
 	}
 
 	public function gettransactions() {
-		return new CoinpaymentTransaction;
+		return new WincashpayTransaction;
 	}
 
 }

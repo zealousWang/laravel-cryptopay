@@ -5,9 +5,9 @@ namespace Wincash\Payment\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Wincash\Payment\Console\InstallationCommand;
-use Wincash\Payment\Helpers\CoinPaymentHelper;
+use Wincash\Payment\Helpers\WincashpayHelper;
 
-class CoinPaymentServiceProvider extends ServiceProvider
+class WincashpayServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -37,7 +37,7 @@ class CoinPaymentServiceProvider extends ServiceProvider
      */
     public function register() {
         $this->app->bind('Wincashpay', function(){
-            return new CoinPaymentHelper;
+            return new WincashpayHelper;
         });
         $this->app->register(RouteServiceProvider::class);
     }
@@ -62,7 +62,7 @@ class CoinPaymentServiceProvider extends ServiceProvider
              * Publishing Jobs
              *
              */
-            __DIR__.'/../Jobs/CoinpaymentListener.php' => app_path('jobs/CoinpaymentListener.php'),
+            __DIR__.'/../Jobs/WincashpayIPNListener.php' => app_path('jobs/WincashpayIPNListener.php'),
         ], 'wincashpay');
 
         $this->mergeConfigFrom(

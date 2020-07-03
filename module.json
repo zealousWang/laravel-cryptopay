@@ -6,10 +6,10 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Wincash\\Payment\\Providers\\CoinPaymentServiceProvider"
+        "Wincash\\Payment\\Providers\\WincashpayServiceProvider"
     ],
     "aliases": {
-        "CoinPayment": "Wincash\\Payment\\Helpers\\CoinPaymentFacade"
+        "CoinPayment": "Wincash\\Payment\\Helpers\\WincashpayFacade"
     },
     "files": [],
     "requires": []
