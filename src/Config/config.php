@@ -70,7 +70,7 @@ return [
     'header' => [
         'default' => 'logo',
         'type' => [
-            'logo' => '/wincashpay.logo.png', // path assets file only
+            'logo' => 'https://wincashpay.com/assets/img/payment_logo_text.png', // path assets file only
             'text' => 'Your payment summary'
         ]
     ],

@@ -30,9 +30,7 @@ class AjaxController extends CoinPaymentController {
      * @return Json
      */
     public function rates($usd) {
-        $rates = $this->api_call('rates', [
-            'accepted' => 1
-        ]);
+        $rates = parent::getRates(true, true);
         
         if(strtolower($rates['error']) == 'ok') {
             return $this->rates_formater($rates['result'], $usd);
@@ -55,99 +53,91 @@ class AjaxController extends CoinPaymentController {
      */
     protected function rates_formater(Array $rates, $usd) {
             
-            if(!is_array($rates)){
-                throw new Exception('The data must be an array');
-            }
+        if(!is_array($rates)){
+            throw new Exception('The data must be an array');
+        }
 
-            if(empty($rates['BTC'])){
-                throw new Exception('Rate BTC not found!, please activate BTC support coin for default coin rates.');
-            }
+        if(empty($rates['BTC'])){
+            throw new Exception('Rate BTC not found!, please activate BTC support coin for default coin rates.');
+        }
 
-            if(empty($rates[config('wincashpay.default_currency')])){
-                throw new Exception('Is fiat ' . config('wincashpay.default_currency') . ' not supported. please contact Wincashpay support.');
+        if(empty($rates[config('wincashpay.default_currency')])){
+            throw new Exception('Is fiat ' . config('wincashpay.default_currency') . ' not supported. please contact Wincashpay support.');
+        }
+
+        /**
+         * Get default coin and fiat
+         */
+        $btcRate = (FLOAT) $rates['BTC']['rate_btc'];
+        $usdRate = (FLOAT) $rates[config('wincashpay.default_currency')]['rate_btc'];
+        $rateAmount = $usdRate * (FLOAT) $usd;
+
+        $fiat = [];
+        $coins = [];
+        $aliases = [];
+        $coins_accept = [];
+        foreach($rates as $coin => $value) {
+            /**
+             * Get all crypto currencies
+             */
+            if((INT) $value['is_fiat'] === 0){
+                $rate = $rates[$coin]['rate_btc'] > 0 ? ($rateAmount / $rates[$coin]['rate_btc']) : 0;
+
+                $coins[] = [
+                  'name' => $value['name'],
+                  'amount' => $rate > 0 ? number_format($rate,8,'.','') : '-',
+                  'iso' => $coin,
+                  'icon' => $value['icon'],
+                  'selected' => $coin == 'BTC' ? true : false,
+                  'accepted' => $value['accepted']
+                ];
+
+                /**
+                 * Set all aliases coin
+                 */
+                $aliases[$coin] = $value['name'];
             }
 
             /**
-             * Get default coin and fiat 
+             * Get accepted crypto currencies
              */
-            $btcRate = (FLOAT) $rates['BTC']['rate_btc'];
-            $usdRate = (FLOAT) $rates[config('wincashpay.default_currency')]['rate_btc'];
-            $rateAmount = $usdRate * (FLOAT) $usd;
+            if((INT) $value['is_fiat'] === 0 && $value['accepted'] == 1){
+                $rate = $rates[$coin]['rate_btc'] > 0 ? ($rateAmount / $rates[$coin]['rate_btc']) : 0;
 
-            $fiat = [];
-            $coins = [];
-            $aliases = [];
-            $coins_accept = [];
-            foreach($rates as $coin => $value) {
-                /**
-                 * Get all crypto currencies
-                 */
-                if((INT) $value['is_fiat'] === 0){
-                    $rate = $rates[$coin]['rate_btc'] > 0 ? ($rateAmount / $rates[$coin]['rate_btc']) : 0;
-
-                    if(in_array($coin, ['BTC.LN'])) {
-                        $img = 'BTCLN';
-                    } else if(in_array($coin, ['USDT.ERC20'])) {
-                        $img = 'USDT';
-                    } else {
-                        $img = $coin;
-                    }
-
-                    $coins[] = [
-                      'name' => $value['name'],
-                      'amount' => $rate > 0 ? number_format($rate,8,'.','') : '-',
-                      'iso' => $coin,
-                      'icon' => 'https://www.wincashpay.com/images/coins/' . $img . '.png',
-                      'selected' => $coin == 'BTC' ? true : false,
-                      'accepted' => $value['accepted']
-                    ];
-
-                    /**
-                     * Set all aliases coin
-                     */
-                    $aliases[$coin] = $value['name'];
+                if(in_array($coin, ['BTC.LN'])) {
+                    $img = 'BTCLN';
+                } else if(in_array($coin, ['USDT.ERC20'])) {
+                    $img = 'USDT';
+                } else {
+                    $img = $coin;
                 }
 
-                /**
-                 * Get accepted crypto currencies
-                 */
-                if((INT) $value['is_fiat'] === 0 && $value['accepted'] == 1){
-                    $rate = $rates[$coin]['rate_btc'] > 0 ? ($rateAmount / $rates[$coin]['rate_btc']) : 0;
-
-                    if(in_array($coin, ['BTC.LN'])) {
-                        $img = 'BTCLN';
-                    } else if(in_array($coin, ['USDT.ERC20'])) {
-                        $img = 'USDT';
-                    } else {
-                        $img = $coin;
-                    }
-
-                    $coins_accept[] = [
-                        'name' => $value['name'],
-                        'amount' => $rate > 0 ? number_format($rate,8,'.','') : '-',
-                        'iso' => $coin,
-                        'icon' => 'https://www.wincashpay.com/images/coins/' . $img . '.png',
-                        'selected' => $coin == 'BTC' ? true : false,
-                        'accepted' => $value['accepted']
-                    ];
-                }
-
-                /**
-                 * Get currencies
-                 */
-                if((INT) $value['is_fiat'] === 1){
-                    $fiat[$coin] = $coin;
-                }
+                $coins_accept[] = [
+                    'name' => $value['name'],
+                    'amount' => $rate > 0 ? number_format($rate,8,'.','') : '-',
+                    'iso' => $coin,
+                    'icon' => 'https://www.wincashpay.com/images/coins/' . $img . '.png',
+                    'selected' => $coin == 'BTC' ? true : false,
+                    'accepted' => $value['accepted']
+                ];
             }
 
-            return [
-                'result' => true,
-                'coins' => $coins,
-                'accepted_coin' => $coins_accept,
-                'aliases' => $aliases,
-                'fiats' => $fiat
-            ];
-        
+            /**
+             * Get currencies
+             */
+            if((INT) $value['is_fiat'] === 1){
+                $fiat[$coin] = $coin;
+            }
+        }
+
+        return [
+            'result' => true,
+            'coins' => $coins,
+            'accepted_coin' => $coins_accept,
+            'aliases' => $aliases,
+            'fiats' => $fiat
+        ];
+
     }
 
     /**
