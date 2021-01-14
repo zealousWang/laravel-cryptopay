@@ -2,7 +2,7 @@
 
 ## New transform coinpayment package
 
-WincashPayment is a Laravel module for handling transactions from [**cryptopay**](https://cryptopay.com) like a create transaction, history transaction, etc.
+Laravel CryptoPayment is a Laravel module for handling transactions from [**cryptopay**](https://cryptopay.com) like a create transaction, history transaction, etc.
 
 
 ## Requirement
